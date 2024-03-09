@@ -1,0 +1,33 @@
+{
+  "name": "asset-warehouse-grpc",
+  "version": "1.0.0",
+  "description": "A project for the older version of the asset warehouse server",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaddeykatri/asset-warehouse-grpc.git"
+  },
+  "keywords": [
+    "GRPC",
+    "node.js",
+    "AssetWarehouse",
+    "FoundationDB"
+  ],
+  "author": "Sachit-Katri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaddeykatri/asset-warehouse-grpc/issues"
+  },
+  "homepage": "https://github.com/shaddeykatri/asset-warehouse-grpc#readme",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.1",
+    "@grpc/proto-loader": "^0.7.10",
+    "@grpc/reflection": "^1.0.3",
+    "grpc-tools": "^1.12.4",
+    "nodemon": "^3.1.0",
+    "protobufjs": "^7.2.6"
+  }
+}

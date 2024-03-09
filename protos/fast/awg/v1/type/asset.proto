@@ -1,0 +1,94 @@
+syntax = "proto3";
+package fast.awg.v1;
+
+// Represents an asset.
+message Asset {
+    string asset_id = 1;            // Unique identifier for the asset
+    string title = 2;               // Title of the asset
+    string description = 3;         // Description of the asset
+    AssetDimensions dimensions = 4; // Dimensions of the asset
+    string category = 5;            // Category of the asset
+    string asset_project = 6;       // Project associated with the asset
+    AssetMetadata metadata = 7;     // Metadata of the asset
+}
+
+// Represents the dimensions of an asset.
+message AssetDimensions {
+    string length = 1;   // Length dimension of the asset
+    string width = 2;    // Width dimension of the asset
+    string height = 3;   // Height dimension of the asset
+}
+
+// Represents the metadata of an asset.
+message AssetMetadata {
+    string glb_src = 1;    // Source for GLB file
+    string usdz_src = 2;   // Source for USDZ file
+    string fbx_src = 3;    // Source for FBX file
+    string png_src = 4;    // Source for PNG file
+    string unity_src = 5;  // Source for Unity file
+    string poly_count = 6; // Polygon count of the asset
+}
+
+// Service for managing assets.
+service AssetService {
+    // Retrieves all assets.
+    rpc GetAllAssets(Empty) returns (GetAllAssetsResponse);
+
+    // Retrieves a single asset by its ID.
+    rpc GetAsset(GetAssetRequest) returns (GetAssetResponse);
+
+    // Updates an existing asset.
+    rpc UpdateAsset(UpdateAssetRequest) returns (UpdateAssetResponse);
+
+    // Deletes an asset by its ID.
+    rpc DeleteAsset(DeleteAssetRequest) returns (Empty);
+
+    // Creates a new asset.
+    rpc CreateAsset(CreateAssetRequest) returns (CreateAssetResponse);
+}
+
+// Empty message used for RPCs that don't require any parameters.
+message Empty {}
+
+// Response for GetAllAssets RPC.
+message GetAllAssetsResponse {
+    repeated Asset assets = 1; // List of assets returned
+}
+
+// Request to get a single asset.
+message GetAssetRequest {
+    string asset_id = 1; // ID of the asset to retrieve
+}
+
+// Response containing a single asset.
+message GetAssetResponse {
+    Asset asset = 1; // The retrieved asset
+}
+
+// Request to update an asset.
+message UpdateAssetRequest {
+    string asset_id = 1;    // ID of the asset to update
+    Asset updated_asset = 2; // Updated asset information
+}
+
+// Response for UpdateAsset RPC.
+message UpdateAssetResponse {
+    string status = 1;       // Status of the update operation
+    Asset updated_asset = 2; // The updated asset
+}
+
+// Request to delete an asset.
+message DeleteAssetRequest {
+    string asset_id = 1; // ID of the asset to delete
+}
+
+// Request to create a new asset.
+message CreateAssetRequest {
+    Asset asset = 1; // The asset to create
+}
+
+// Response for CreateAsset RPC.
+message CreateAssetResponse {
+    string status = 1; // Status of the create operation
+    Asset asset = 2;   // The created asset
+}
