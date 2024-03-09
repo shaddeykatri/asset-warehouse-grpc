@@ -1,0 +1,61 @@
+syntax = "proto3";
+package fast.awg.v1;
+
+// Enum defining different types of users
+enum User_Type {
+    ADMIN = 1;
+    CREATOR = 2;
+    USER = 3;
+    OWNER = 4;
+}
+
+// Message representing a user
+message User {
+    string user_id = 1;      // Unique identifier for the user
+    string name = 2;         // Name of the user
+    string email = 3;        // Email address of the user
+    User_Type user_type = 4; // Type of user, e.g., Admin, Creator, User, Owner
+    string location = 5;     // Location of the user
+}
+
+// Service definition for user operations
+service UserService {
+    // Get a user by their ID
+    rpc GetUser(GetUserRequest) returns (User);
+
+    // Get all users
+    rpc GetAllUsers(GetAllUsersRequest) returns (stream User);
+
+    // Create a new user
+    rpc CreateUser(CreateUserRequest) returns (User);
+
+    // Update an existing user
+    rpc UpdateUser(UpdateUserRequest) returns (User);
+
+    // Delete a user by their ID
+    rpc DeleteUser(DeleteUserRequest) returns (User);
+}
+
+// Request message to get a user by ID
+message GetUserRequest {
+    string user_id = 1;  // The ID of the user to fetch
+}
+
+// Request message for fetching all users
+message GetAllUsersRequest {}
+
+// Request message to create a new user
+message CreateUserRequest {
+    User user = 1;  // The user to be created
+}
+
+// Request message to update an existing user
+message UpdateUserRequest {
+    string user_id = 1;  // The ID of the user to update
+    User user = 2;       // The updated user information
+}
+
+// Request message to delete a user by ID
+message DeleteUserRequest {
+    string user_id = 1;  // The ID of the user to delete
+}
